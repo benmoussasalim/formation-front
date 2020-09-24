@@ -28,7 +28,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/assets/vendor/css-chart.css",
+              "src/assets/scss/style.scss",
+              "src/styles.scss",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },
@@ -123,6 +127,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "formation-front"
+    }
+  },
+  "defaultProject": "formation-front",
+  "cli": {
+    "analytics": false
+  }
 }
