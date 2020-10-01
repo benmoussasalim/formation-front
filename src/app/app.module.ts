@@ -11,6 +11,7 @@ import fr from '@angular/common/locales/fr';
 import {registerLocaleData} from '@angular/common';
 import {SimpleNotificationsModule} from 'angular2-notifications';
 
+
 registerLocaleData(fr);
 
 @NgModule({

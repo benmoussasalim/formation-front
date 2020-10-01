@@ -7,8 +7,8 @@ const routes: Routes = [
   {
     path: 'app',
     loadChildren: () =>
-      import('./layouts/layouts.module').then(m => m.LayoutsModule)
-  }
+      import('./layouts/layouts.module').then(m => m.LayoutsModule)},
+
 ];
 
 @NgModule({
