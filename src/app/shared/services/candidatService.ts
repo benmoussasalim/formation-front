@@ -18,6 +18,9 @@ export class CandidatService {
   public getAll(): Observable<Candidat[]> {
     return this.httpClient.get<Candidat[]>(this.url);
   }
+  public filtrer(keyword): Observable<Candidat[]> {
+    return this.httpClient.get<Candidat[]>(this.url + '/filtrer/' + keyword);
+  }
 
   public addCandidat(candidat: Candidat): Observable<MessageResponse> {
     return this.httpClient.post<MessageResponse>(this.url, candidat);
@@ -29,5 +32,8 @@ export class CandidatService {
   public updateCandidat(candidat: Candidat): Observable<MessageResponse> {
     return this.httpClient.put<MessageResponse>(this.url , candidat);
   }
-
+  public findById(id: number): Observable<Candidat>
+  {
+    return  this.httpClient.get<Candidat>(this.url + '/' + id);
+  }
 }

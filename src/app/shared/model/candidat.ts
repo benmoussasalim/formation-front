@@ -9,6 +9,6 @@ export class Candidat extends Personne{
   adresse: string;
   niveauEtude: string;
   etablissement: string;
-  status: Status;
+  status: string;
   societe: string;
 }
