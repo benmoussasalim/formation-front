@@ -18,16 +18,18 @@ export class FormateurService {
   public getAll(): Observable<Formateur[]> {
     return this.httpClient.get<Formateur[]>(this.url);
   }
-
-  public addFormateur(formateur: Formateur): Observable<MessageResponse> {
-    return this.httpClient.post<MessageResponse>(this.url, formateur);
+  public getFormateurByTheme(theme): Observable<Formateur[]> {
+    // @ts-ignore
+    return this.httpClient.get<Formateur[]>(this.url, theme);
   }
-  // tslint:disable-next-line:ban-types
-  public deleteFormateur(id: Number): Observable<MessageResponse> {
+  public addFormateur(formateurThemes): Observable<MessageResponse> {
+    return this.httpClient.post<MessageResponse>(this.url, formateurThemes);
+  }
+  public deleteFormateur(id: number): Observable<MessageResponse> {
     return this.httpClient.delete<MessageResponse>(this.url + '/' + id);
   }
-  public updateFormateur(formateur: Formateur): Observable<MessageResponse> {
-    return this.httpClient.put<MessageResponse>(this.url , formateur);
+  public updateFormateur(formateurThemes): Observable<MessageResponse> {
+    return this.httpClient.put<MessageResponse>(this.url , formateurThemes);
   }
   public findById(id: number): Observable<Formateur>
   {
