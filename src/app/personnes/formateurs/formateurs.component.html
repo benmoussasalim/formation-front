@@ -1,0 +1,54 @@
+<div class="card">
+  <div class="card-header">
+
+    <button class="btn btn-success fa-pull-right"(click)="clickAdd()">
+      <i class="fa fa-plus"></i>
+      Nouveau formateur
+    </button>
+  </div>
+  <div class="card-body">
+
+
+    <nz-table #basicTable [nzData]="formateurs">
+      <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Téléphone</th>
+        <th>Email</th>
+        <th width="10%">Opération</th>
+
+        `
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{data.nom}}</td>
+        <td>{{data.prenom}}</td>
+        <td>{{data.telephone}}</td>
+        <td>{{data.email}}</td>
+        <td>
+          <a class="mr-2"
+             nz-popconfirm
+             nzPopconfirmTitle="Are you sure delete this task?"
+             nzPopconfirmPlacement="rightBottom"
+             (nzOnConfirm)="deleteFormateur(data.id)"
+
+          >
+            <i class="fa fa-trash-alt" style="color: red"></i>
+          </a>
+          <a (click)="clickEdit(data.id)">
+            <i class="fa fa-pencil-alt" style="color: green"></i>
+
+          </a>
+        </td>
+
+      </tr>
+
+
+      </tbody>
+
+    </nz-table>
+  </div>
+</div>
+

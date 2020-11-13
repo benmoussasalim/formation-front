@@ -1,0 +1,58 @@
+<div class="card">
+  <div class="card-header">
+
+    <button class="btn btn-success fa-pull-right" (click)="clickAdd()">
+      <i class="fa fa-plus"></i>
+      Nouveau thème
+    </button>
+  </div>
+  <div class="card-body">
+
+
+    <nz-table #basicTable [nzData]="themes">
+      <thead>
+      <tr>
+        <th>Libellé</th>
+        <th width="10%">Opération</th>
+
+        `
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{data.libelle}}</td>
+        <td>
+          <a class="mr-2"
+            nz-popconfirm
+            nzPopconfirmTitle="Are you sure delete this task?"
+            nzPopconfirmPlacement="rightBottom"
+            (nzOnConfirm)="deleteTheme(data.id)"
+
+         >
+            <i class="fa fa-trash-alt" style="color: red"></i>
+          </a>
+          <a (click)="clickEdit(data)">
+            <i class="fa fa-pencil-alt" style="color: green"></i>
+
+          </a>
+        </td>
+
+      </tr>
+
+
+      </tbody>
+
+    </nz-table>
+  </div>
+</div>
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Thème"
+  (nzOnCancel)="isVisible=false"
+  (nzOnOk)="valider()"
+  [nzOkLoading]="isOkLoading">
+  <div class="form-group row">
+    <label >Libellé</label>
+    <input class="form-control" [(ngModel)]="theme.libelle">
+  </div>
+</nz-modal>

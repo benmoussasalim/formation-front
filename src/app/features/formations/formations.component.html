@@ -1,0 +1,66 @@
+<div class="card">
+  <div class="card-header">
+
+    <button class="btn btn-success fa-pull-right"(click)="clickAdd()">
+      <i class="fa fa-plus"></i>
+      Nouveau formation
+    </button>
+  </div>
+  <div class="card-body">
+
+
+    <nz-table #basicTable [nzData]="formations">
+      <thead>
+      <tr>
+        <th>Libelle</th>
+        <th>Date debut prevu</th>
+        <th>Date fin prevu</th>
+        <th>Date debut reel</th>
+        <th>Date fin reel</th>
+        <th>Nombre d'heures</th>
+        <th>Prix</th>
+        <th>Status</th>
+        <th>Théme</th>
+        <th>Formateur</th>
+        <th width="10%">Opération</th>
+
+        `
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{data.libelle}}</td>
+        <td>{{data.dateDebutPrevu}}</td>
+        <td>{{data.dateFinPrevu}}</td>
+        <td>{{data.dateDebutReel}}</td>
+        <td>{{data.dateFinReel}}</td>
+        <td>{{data.nbrHeur}}</td>
+        <td>{{data.prix}}</td>
+        <td>{{data.statusFormation}}</td>
+        <td>{{data.theme.libelle}}</td>
+        <td>{{data.formateur.nom}} {{data.formateur.prenom}}</td>
+        <td>
+          <a class="mr-2"
+             nz-popconfirm
+             nzPopconfirmTitle="Are you sure delete this task?"
+             nzPopconfirmPlacement="rightBottom"
+             (nzOnConfirm)="deleteFormation(data.id)"
+
+          >
+            <i class="fa fa-trash-alt" style="color: red"></i>
+          </a>
+          <a (click)="clickEdit(data.id)">
+            <i class="fa fa-pencil-alt" style="color: green"></i>
+
+          </a>
+        </td>
+
+      </tr>
+
+
+      </tbody>
+
+    </nz-table>
+  </div>
+</div>
+

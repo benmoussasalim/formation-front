@@ -1,0 +1,221 @@
+<form #f="ngForm"
+      (ngSubmit)="f.form.valid && valider()">
+  <div class="card">
+    <div class="card-header">
+
+
+      <h4 class="card-title mb-0">{{title}}</h4>
+
+    </div>
+
+    <div class="card-body">
+
+      <div class="row">
+
+        <div class="form-group col-sm-6">
+          <label>Date d'inscription</label>
+          <!-- <input  class="form-control"
+                      [(ngModel)]="candidat.dateInscrit"
+                  [value]="currentDate"
+                  name="dateInscri" #dateInscri="ngModel" required>-->
+
+          <nz-date-picker #dateInscri="ngModel"
+                          [(ngModel)]="candidat.dateInscrit"
+                          class="form-control"
+                          name="dateInscri"
+                          nzFormat="dd/MM/yyyy"
+                          required></nz-date-picker>
+          <div *ngIf="f.submitted && dateInscri.invalid"
+               class="form-text text-danger">
+
+            Date d'inscription réquis
+          </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+          <label>CIN</label>
+          <input #cin="ngModel" (keypress)="numberOnly($event)"
+                 [(ngModel)]="candidat.cin" class="form-control"
+                 maxlength="8" minlength="8" name="cin" placeholder="CIN" required>
+          <div *ngIf="f.submitted && cin.invalid" class="form-text text-danger">
+            <div *ngIf="cin.errors.required">
+              CIN réquis
+            </div>
+            <div *ngIf="cin.errors.minlength">
+              CIN doit contenir 8 chiffres
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6">
+          <label>Nom</label>
+          <input #nom="ngModel"
+                 [(ngModel)]="candidat.nom" class="form-control"
+                 name="nom" placeholder="Nom" required>
+          <div *ngIf="f.submitted && nom.invalid" class="form-text text-danger">
+
+            Nom réquis
+
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6">
+          <label>Prénom</label>
+          <input #prenom="ngModel"
+                 [(ngModel)]="candidat.prenom"
+                 class="form-control" name="prenom"
+                 placeholder="Prénom" required>
+          <div *ngIf="f.submitted && prenom.invalid" class="form-text text-danger">
+
+            Prénom réquis
+
+          </div>
+        </div>
+        <div class="form-group col-sm-6">
+          <label>Téléphone 1</label>
+          <input #telephone="ngModel" (keypress)="numberOnly($event)"
+                 [(ngModel)]="candidat.telephone" class="form-control"
+                 name="telephone" placeholder="telephone" required>
+          <div *ngIf="f.submitted && telephone.invalid"
+               class="form-text text-danger">
+
+            Téléphone réquis
+
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6">
+          <label>Téléphone 2</label>
+          <input #telephone2="ngModel" (keypress)="numberOnly($event)"
+                 [(ngModel)]="candidat.telephone2"
+                 class="form-control" name="telephone2"
+                 placeholder="telephone2" >
+        </div>
+        <div class="form-group col-sm-6">
+          <label>Date de naissance</label>
+
+
+          <nz-date-picker #dateNaissance="ngModel"
+                          [(ngModel)]="candidat.dateNaissance"
+                          class="form-control"
+                          name="dateNaissance"
+                          nzFormat="dd/MM/yyyy"
+                          required></nz-date-picker>
+          <div *ngIf="f.submitted && dateNaissance.invalid"
+               class="form-text text-danger">
+
+            Date de naissance réquis
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6">
+          <label class="mr-3">Sexe</label>
+          <div class="col-sm-12">
+            <nz-radio-group name="sexe" [(ngModel)]="candidat.sexe">
+              <label nz-radio  nzValue="Homme">Homme</label>
+              <label nz-radio nzValue="Femme">Femme</label>
+
+            </nz-radio-group>
+          </div>
+
+          `
+        </div>
+
+
+        <div class="form-group col-sm-6">
+          <label>Email</label>
+          <input #email="ngModel" [(ngModel)]="candidat.email" class="form-control"
+                 email name="email"
+                 placeholder="Email" required type="email">
+          <div *ngIf="f.submitted && email.invalid" class="form-text text-danger">
+            <div *ngIf="email.errors.required">
+              Email réquis
+            </div>
+            <div *ngIf="email.errors.email">
+              Email invalide
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6">
+          <label>Adresse</label>
+          <input #adresse="ngModel"
+                 [(ngModel)]="candidat.adresse"
+                 class="form-control" name="adresse"
+                 placeholder="Adresse" required>
+          <div *ngIf="f.submitted && adresse.invalid" class="form-text text-danger">
+
+            Adresse réquis
+
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6">
+          <label class="mr-3">Niveau d'étude</label>
+          <div>
+          <nz-select name="niveau" [(ngModel)]='candidat.niveauEtude' class="form-control">
+            <nz-option nzValue="Baccalauriat" nzLabel="Baccalauriat"></nz-option>
+            <nz-option nzValue="Bac +1" nzLabel="Bac +1"></nz-option>
+            <nz-option nzValue="Bac +2" nzLabel="Bac +2"></nz-option>
+            <nz-option nzValue="Bac +3" nzLabel="Bac +3"></nz-option>
+            <nz-option nzValue="Bac +4" nzLabel="Bac +4"></nz-option>
+            <nz-option nzValue="Bac +5" nzLabel="Bac +5"></nz-option>
+          </nz-select>
+        </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+          <label>Etablissement</label>
+          <input #etablissement="ngModel"
+                 [(ngModel)]="candidat.etablissement"
+                 class="form-control" name="etablissement"
+                 placeholder="Etablissement" required>
+          <div *ngIf="f.submitted && etablissement.invalid" class="form-text text-danger">
+
+            Etablissement réquis
+
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6">
+          <label class="mr-3">Status</label>
+          <div class="col-sm-12">
+            <nz-radio-group name="status" [(ngModel)]="candidat.status" (ngModelChange)="onItemChange()">
+              <label nz-radio  nzValue="Etudiant">Etudiant</label>
+              <label nz-radio nzValue="chômeur">chômeur</label>
+              <label nz-radio  nzValue="Employé" >Employé</label>
+            </nz-radio-group>
+          </div>
+
+          `
+        </div>
+
+        <div class="form-group col-sm-6" *ngIf="etudiant">
+          <label>Société</label>
+          <input #societe="ngModel"
+                 [(ngModel)]="candidat.societe" class="form-control"
+                 name="societe" placeholder="Société" >
+        </div>
+      </div>
+
+
+
+    </div>
+    <div class="card-footer ">
+      <div class="fa-pull-right">
+        <button class="btn btn-danger mr-2" (click)="annuler()" type="reset">Annuler</button>
+        <button class="btn btn-success"  type="submit" *ngIf="!id">Ajouter</button>
+        <button class="btn btn-warning"  type="submit" *ngIf="id">Modifier</button>
+      </div>
+    </div>
+  </div>
+</form>

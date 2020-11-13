@@ -1,0 +1,117 @@
+<div class="card">
+  <div class="card-header">
+
+    <div class="row">
+
+
+      <div class="input-group  col-sm-4">
+
+        <input (keyup)="filtrer($event)"
+               [(ngModel)]="keyWord"
+               class="form-control" placeholder="Filtrer"
+               type="text">
+        <div class="input-group-append">
+          <button class="btn  btn-success" type="button">
+            <i
+               class="ti-search"></i></button>
+        </div>
+      </div>
+
+
+      <div class="col-sm-6"></div>
+      <button (click)="clickAdd()" class="btn btn-success float-right">
+        <i class="fa fa-plus"></i>
+        Nouveau candidat
+      </button>
+    </div>
+
+
+  </div>
+
+
+  <div class="card-body">
+
+
+    <nz-table #basicTable [nzData]="candidats">
+      <thead>
+      <tr>
+        <th nzWidth="60px"></th>
+        <th>Date d'inscrit</th>
+        <th>CIN</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Téléphone</th>
+
+        <th width="10%">Opération</th>
+
+        `
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let data of basicTable.data">
+      <tr >
+        <td [nzExpand]="expandSet.has(data.id)"
+            (nzExpandChange)="onExpandChange(data.id, $event)"></td>
+        <td>{{data.dateInscrit | date: 'dd/MM/yyyy'}}</td>
+        <td>{{data.cin}}</td>
+        <td>{{data.nom}}</td>
+        <td>{{data.prenom}}</td>
+        <td>{{data.email}}</td>
+        <td>{{data.telephone}}</td>
+
+        <td>
+          <a (nzOnConfirm)="deleteCandidat(data.id)"
+             class="mr-2"
+             nz-popconfirm
+             nzPopconfirmPlacement="rightBottom"
+             nzPopconfirmTitle="Are you sure delete this task?"
+
+          >
+            <i class="fa fa-trash-alt" style="color: red"></i>
+          </a>
+          <a (click)="clickEdit(data.id)">
+            <i class="fa fa-pencil-alt" style="color: green"></i>
+
+          </a>
+        </td>
+
+      </tr>
+      <tr [nzExpand]="expandSet.has(data.id)">
+ <table >
+
+
+          <tr>
+            <th>Date de naissance</th>
+            <th>Sexe</th>
+            <th>Téléphone</th>
+            <th>Adresse</th>
+            <th>Niveau d'etude</th>
+            <th>Etablissement</th>
+            <th>Status</th>
+            <th>Société</th>
+          </tr>
+   <tr>
+             <td>{{data.dateNaissance | date: 'dd/MM/yyyy'}}</td>
+             <td>{{data.sexe}}</td>
+             <td>{{data.telephone2}}</td>
+             <td>{{data.adresse}}</td>
+             <td>{{data.niveauEtude}}</td>
+             <td>{{data.etablissement}}</td>
+             <td>{{data.status}}</td>
+             <td>{{data.societe}}</td>
+
+           </tr>
+
+         </table>
+
+
+
+      </tr>
+      </ng-container>
+      </tbody>
+
+    </nz-table>
+  </div>
+</div>
+

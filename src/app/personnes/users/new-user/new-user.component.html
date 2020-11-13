@@ -1,0 +1,133 @@
+<form #f="ngForm"
+      (ngSubmit)="f.form.valid && valider()">
+  <div class="card">
+    <div class="card-header">
+
+
+      <h4 class="card-title mb-0">{{title}}</h4>
+
+    </div>
+
+    <div class="card-body">
+
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label>Nom</label>
+          <input #nom="ngModel"
+                 [(ngModel)]="user.nom" class="form-control"
+                 name="nom" placeholder="Nom" required>
+          <div *ngIf="f.submitted && nom.invalid" class="form-text text-danger">
+
+            Nom réquis
+
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6">
+          <label>Prénom</label>
+          <input #prenom="ngModel"
+                 [(ngModel)]="user.prenom"
+                 class="form-control" name="prenom"
+                 placeholder="Prénom" required>
+          <div *ngIf="f.submitted && prenom.invalid" class="form-text text-danger">
+
+            Prénom réquis
+
+          </div>
+        </div>
+        <div class="form-group col-sm-6">
+          <label>Téléphone </label>
+          <input #telephone="ngModel" (keypress)="numberOnly($event)"
+                 [(ngModel)]="user.telephone" class="form-control"
+                 name="telephone" placeholder="Telephone" required>
+          <div *ngIf="f.submitted && telephone.invalid"
+               class="form-text text-danger">
+
+            Téléphone réquis
+
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6">
+          <label>Téléphone 2</label>
+          <input (keypress)="numberOnly($event)"
+                 [(ngModel)]="user.telephone2" class="form-control"
+                 name="telephone2" placeholder="Téléphone 2" >
+
+        </div>
+
+
+        <div class="form-group col-sm-6">
+          <label>Email</label>
+          <input #email="ngModel" [(ngModel)]="user.email" class="form-control"
+                 email name="email"
+                 placeholder="Email" required type="email">
+          <div *ngIf="f.submitted && email.invalid" class="form-text text-danger">
+            <div *ngIf="email.errors.required">
+              Email réquis
+            </div>
+            <div *ngIf="email.errors.email">
+              Email invalide
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+          <label>Nom d'utilisateur</label>
+          <input #username="ngModel"
+                 [(ngModel)]="user.username" class="form-control"
+                 name="username" placeholder="Nom d'utilisateur" required>
+          <div *ngIf="f.submitted && username.invalid" class="form-text text-danger">
+
+            Nom d'utilisateur réquis
+
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6" *ngIf="!id">
+          <label>Mot de passe</label>
+          <input #pwd="ngModel" [(ngModel)]="user.password"
+                 class="form-control" name="pwd"
+                 placeholder="Mot de passe" required type="password">
+          <div *ngIf="f.submitted && pwd.invalid" class="form-text text-danger">
+            Mot de passe réquis
+
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6" *ngIf="!id">
+          <label>Confirmer Mot de passe</label>
+          <input #pwd2="ngModel" [(ngModel)]="confirmPassword"
+                 [pattern]="user.password" class="form-control"
+                 name="pwd2" placeholder="Confirmer Mot de passe"
+                 required
+                 type="password">
+          <div *ngIf="f.submitted && pwd2.invalid" class="form-text text-danger">
+
+            <div *ngIf="pwd2.errors.required">
+              Confirmer Mot de passe réquis
+            </div>
+            <div *ngIf="pwd2.errors.pattern">
+              Les mots de passe doit etre identiques
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="fa-pull-right">
+        <button (click)="annuler()" class="btn btn-danger mr-2" type="reset">Annuler</button>
+        <button *ngIf="!id" class="btn btn-success" type="submit">Ajouter</button>
+        <button *ngIf="id" class="btn btn-warning" type="submit">Modifier</button>
+      </div>
+    </div>
+
+  </div>
+</form>

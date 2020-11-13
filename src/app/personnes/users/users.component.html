@@ -1,0 +1,60 @@
+<div class="card">
+  <div class="card-header">
+
+    <button class="btn btn-success fa-pull-right"(click)="clickAdd()">
+      <i class="fa fa-plus"></i>
+      Nouvel Utilisateur
+    </button>yui
+  </div>
+  <div class="card-body">
+
+
+    <nz-table #basicTable [nzData]="users">
+      <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Téléphone 1</th>
+        <th>Téléphone 2</th>
+        <th>Email</th>
+        <th>Nom d'utilisateur</th>
+        <th>Etat</th>
+
+        <th width="10%">Opération</th>
+
+        `
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{data.nom}}</td>
+        <td>{{data.prenom}}</td>
+        <td>{{data.telephone}}</td>
+        <td>{{data.telephone2}}</td>
+        <td>{{data.email}}</td>
+        <td>{{data.username}}</td>
+        <td>    <nz-switch [(ngModel)]="data.enabled"></nz-switch>
+        </td>
+        <td>
+          <a class="mr-2"
+             nz-popconfirm
+             nzPopconfirmTitle="Are you sure delete this task?"
+             nzPopconfirmPlacement="rightBottom"
+             (nzOnConfirm)="deleteUser(data.id)" >
+            <i class="fa fa-trash-alt" style="color: red"></i>
+          </a>
+          <a (click)="clickEdit(data.id)">
+            <i class="fa fa-pencil-alt" style="color: green"></i>
+
+          </a>
+        </td>
+
+      </tr>
+
+
+      </tbody>
+
+    </nz-table>
+  </div>
+</div>
+
