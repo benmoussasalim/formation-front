@@ -18,9 +18,9 @@ export class FormateurService {
   public getAll(): Observable<Formateur[]> {
     return this.httpClient.get<Formateur[]>(this.url);
   }
-  public getFormateurByTheme(theme): Observable<Formateur[]> {
+  public getByTheme(id): Observable<Formateur[]> {
     // @ts-ignore
-    return this.httpClient.get<Formateur[]>(this.url, theme);
+    return this.httpClient.get<Formateur[]>(this.url + '/theme/' + id);
   }
   public addFormateur(formateurThemes): Observable<MessageResponse> {
     return this.httpClient.post<MessageResponse>(this.url, formateurThemes);

@@ -19,6 +19,10 @@ export class ThemeService {
     return this.httpClient.get<Theme[]>(this.url);
   }
 
+  public getByFormateur(id): Observable<Theme[]> {
+    return this.httpClient.get<Theme[]>(this.url + '/formateur/' + id);
+  }
+
   public addTheme(theme: Theme): Observable<MessageResponse> {
     return this.httpClient.post<MessageResponse>(this.url, theme);
   }

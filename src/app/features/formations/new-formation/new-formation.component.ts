@@ -121,7 +121,7 @@ export class NewFormationComponent implements OnInit {
   }
 
   onItemChange() {
-    this.formateurService.getFormateurByTheme(this.formation.theme).subscribe(data => {
+    this.formateurService.getByTheme(this.formation.theme.id).subscribe(data => {
       this.formateurs = data;
       console.log(data);
     }, error => {
