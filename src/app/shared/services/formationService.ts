@@ -15,9 +15,11 @@ export class FormationService {
   }
 
   public getAll(status): Observable<Formation[]> {
+    return this.httpClient.get<Formation[]>(this.url + '/status/' + status);
+  }
+  public getById(id): Observable<Formation[]> {
     return this.httpClient.get<Formation[]>(this.url + '/' + status);
   }
-
   public addFormation(formation: Formation): Observable<MessageResponse> {
     return this.httpClient.post<MessageResponse>(this.url, formation);
   }

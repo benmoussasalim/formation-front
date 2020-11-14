@@ -3,6 +3,7 @@ import {Formation} from '../../shared/model/formation';
 import {Router} from '@angular/router';
 import {FormateurService} from '../../shared/services/formateurService';
 import {FormationService} from '../../shared/services/formationService';
+import {MessageService} from '../../shared/services/message.service';
 
 @Component({
   selector: 'app-formations',
@@ -13,7 +14,8 @@ export class FormationsComponent implements OnInit {
   formations: Formation[];
   statusFormation = 'EN_ATTENTE';
   constructor(private  router: Router,
-              private formationService: FormationService) { }
+              private formationService: FormationService,
+              private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.getAll();
@@ -31,8 +33,21 @@ export class FormationsComponent implements OnInit {
   }
 
   deleteFormation(id: any) {
+    this.formationService.deleteFormation(id).subscribe(res => {
+        if (res.success) {
+          this.getAll();
+          this.messageService.success(res.message, res.detail);
+        } else {
+          this.messageService.warning(res.message, res.detail);
+        }
+      }, ex => {
+        this.messageService.error('Erreur', 'Opération non effectuée');
+        console.log(ex);
+      }
+    );
   }
 
   clickEdit(id: any) {
+    this.router.navigate(['/app/features/formation/edit', id]);
   }
 }

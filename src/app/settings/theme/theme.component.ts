@@ -54,9 +54,6 @@ export class ThemeComponent implements OnInit {
       }, ex => {
         this.messageService.error('Erreur', 'Opération non effectuée');
         console.log(ex);
-      },
-      () => {
-        this.isOkLoading = false;
       }
     );
   }

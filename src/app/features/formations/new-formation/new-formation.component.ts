@@ -8,6 +8,7 @@ import {ThemeService} from '../../../shared/services/theme.service';
 import {Theme} from '../../../shared/model/theme';
 import {FormateurService} from '../../../shared/services/formateurService';
 import {Formateur} from '../../../shared/model/formateur';
+import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
 
 @Component({
   selector: 'app-new-formation',
@@ -24,7 +25,17 @@ export class NewFormationComponent implements OnInit {
   title;
   theme = new Theme();
   formateur = new Formateur();
+  disabledDate = (current: Date): boolean => {
+    // Can not select days before today and today
+    return differenceInCalendarDays(current, new Date()) < 0;
+  };
 
+  disabledEndDate = (endValue: Date): boolean => {
+    if (!endValue || !this.formation.dateDebutPrevu) {
+      return false;
+    }
+    return endValue.getTime() <= this.formation.dateDebutPrevu.getTime();
+  };
   constructor(private formationService: FormationService,
               private themeService: ThemeService,
               private messageService: MessageService,
@@ -34,6 +45,7 @@ export class NewFormationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  //  this.formation.dateDebutPrevu = new Date();
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     if (this.id) {
       this.getById();
@@ -42,8 +54,7 @@ export class NewFormationComponent implements OnInit {
 
       this.title = 'Nouveau formation';
     }
-    // @ts-ignore
-    this.themes = this.getAllThemes();
+    this.getAllThemes();
   }
 
   getAllThemes() {
@@ -58,7 +69,7 @@ export class NewFormationComponent implements OnInit {
   getById() {
     this.formationService.findById(this.id).subscribe(data => {
       this.formation = data;
-
+      this.onItemChange();
     }, error => {
       console.log(error);
     });
@@ -86,7 +97,7 @@ export class NewFormationComponent implements OnInit {
     this.formationService.addFormation(this.formation).subscribe(res => {
       if (res.success) {
         this.messageService.success(res.message, res.detail);
-        this.router.navigate(['/app/personnes/formation']);
+        this.router.navigate(['/app/features/formation']);
       } else {
         this.messageService.warning(res.message, res.detail);
       }
@@ -101,7 +112,7 @@ export class NewFormationComponent implements OnInit {
       if (res.success) {
 
         this.messageService.success(res.message, res.detail);
-        this.router.navigate(['/app/personnes/formation']);
+        this.router.navigate(['/app/features/formation']);
       } else {
         this.messageService.warning(res.message, res.detail);
       }
@@ -128,4 +139,12 @@ export class NewFormationComponent implements OnInit {
       console.log(error);
     });
   }
+
+
+
+
+  compareFn(c1: any, c2: any): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
+
 }

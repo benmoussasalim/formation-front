@@ -44,9 +44,7 @@
              nz-popconfirm
              nzPopconfirmTitle="Are you sure delete this task?"
              nzPopconfirmPlacement="rightBottom"
-             (nzOnConfirm)="deleteFormation(data.id)"
-
-          >
+             (nzOnConfirm)="deleteFormation(data.id)">
             <i class="fa fa-trash-alt" style="color: red"></i>
           </a>
           <a (click)="clickEdit(data.id)">

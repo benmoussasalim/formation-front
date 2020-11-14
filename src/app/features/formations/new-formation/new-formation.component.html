@@ -12,6 +12,34 @@
 
       <div class="row">
 
+        <div class="form-group col-sm-6">
+          <label class="mr-3">Thémes</label>
+          <div>
+            <nz-select [compareWith]="compareFn"
+              name="theme"
+              [(ngModel)]='formation.theme'
+              class="form-control"
+              (ngModelChange)="onItemChange()">
+              <nz-option *ngFor="let theme of themes"
+                         [nzValue]="theme"
+                         nzLabel="{{theme.libelle}}"></nz-option>
+            </nz-select>
+          </div>
+        </div>
+
+
+        <div class="form-group col-sm-6">
+          <label class="mr-3">Formateurs</label>
+          <div>
+            <nz-select [compareWith]="compareFn"
+              name="formateur" [(ngModel)]='formation.formateur' class="form-control">
+              <nz-option *ngFor="let formateur of formateurs"
+                         [nzValue]="formateur"
+                         nzLabel="{{formateur.nom}}{{formateur.prenom}}"></nz-option>
+            </nz-select>
+          </div>
+        </div>
+
         <div class="form-group col-sm-12">
           <label>Libelle</label>
           <input #libelle="ngModel"
@@ -25,11 +53,12 @@
         </div>
 
         <div class="form-group col-sm-6">
-          <label>Date de début prevu</label>
+          <label>Date début prevu</label>
 
 
           <nz-date-picker #datedebut="ngModel"
-                          [(ngModel)]="formation.dateDebutReel"
+                          [nzDisabledDate]="disabledDate"
+                          [(ngModel)]="formation.dateDebutPrevu"
                           class="form-control"
                           name="datedebut"
                           nzFormat="dd/MM/yyyy"
@@ -41,41 +70,46 @@
           </div>
         </div>
 
-      <div class="form-group col-sm-6">
-        <label>Date de début prevu</label>
+        <div class="form-group col-sm-6">
+          <label>Date Fin prevu</label>
 
 
-        <nz-date-picker #datefin="ngModel"
-                        [(ngModel)]="formation.dateFinPrevu"
-                        class="form-control"
-                        name="datefin"
-                        nzFormat="dd/MM/yyyy"
-                        required></nz-date-picker>
-        <div *ngIf="f.submitted && datefin.invalid"
-             class="form-text text-danger">
+          <nz-date-picker #datefin="ngModel"
+                          [nzDisabled]="!formation.dateDebutPrevu"
+                          [nzDisabledDate]="disabledEndDate"
+                          [(ngModel)]="formation.dateFinPrevu"
+                          class="form-control"
+                          name="datefin"
+                          nzFormat="dd/MM/yyyy"
+                          required></nz-date-picker>
+          <div *ngIf="f.submitted && datefin.invalid"
+               class="form-text text-danger">
 
-          Date de fin réquis
+            Date de fin réquis
+          </div>
         </div>
-      </div>
-      <div class="form-group col-sm-6">
-        <div>
-        <label>Nombre d'heures</label>
-        </div>
-        <nz-input-number #nbrheur="ngModel"
-          [(ngModel)]="formation.nbrHeur" name="nbrheur"
-                         [nzMin]="1"
-                         [nzMax]="50"
-                         [nzStep]="1" required>
-        </nz-input-number>
-        <div *ngIf="f.submitted && nbrheur.invalid"
-             class="form-text text-danger">
+        <div class="form-group col-sm-6">
+          <div>
+            <label>Nombre d'heures</label>
+          </div>
+          <input #nbrheur="ngModel" type="number"
+                 [(ngModel)]="formation.nbrHeur"
+                 name="nbrheur"
+                 min="1"
+                 placeholder="Nombre d'heure"
+                 class="form-control"
+                 required>
 
-         Nombre d'heures réquis
+          <div *ngIf="f.submitted && nbrheur.invalid"
+               class="form-text text-danger">
+
+            Nombre d'heures réquis
+          </div>
         </div>
-      </div>
         <div class="form-group col-sm-6">
           <label>Prix</label>
           <input type=number #prix="ngModel"
+                 min="1"
                  [(ngModel)]="formation.prix" class="form-control"
                  name="prix" placeholder="Prix" required>
           <div *ngIf="f.submitted && prix.invalid" class="form-text text-danger">
@@ -85,35 +119,14 @@
           </div>
         </div>
 
-        <div class="form-group col-sm-6">
-          <label class="mr-3">Thémes</label>
-          <div>
-            <nz-select name="theme" [(ngModel)]='formation.theme' class="form-control" (ngModelChange)="onItemChange()">
-              <nz-option *ngFor="let theme of themes"
-                         nzValue = "{{theme.libelle}}"
-                         nzLabel = "{{theme.libelle}}"></nz-option>
-            </nz-select>
-          </div>
-        </div>
 
-
-        <div class="form-group col-sm-6">
-          <label class="mr-3">Formateurs</label>
-          <div>
-            <nz-select name="formateur" [(ngModel)]='formation.formateur' class="form-control" >
-              <nz-option *ngFor="let formateur of formateurs"
-                         nzValue = "{{formateur.nom}}{{formateur.prenom}}"
-                         nzLabel = "{{formateur.nom}}{{formateur.prenom}}"></nz-option>
-            </nz-select>
-          </div>
-        </div>
       </div>
     </div>
     <div class="card-footer ">
       <div class="fa-pull-right">
         <button class="btn btn-danger mr-2" (click)="annuler()" type="reset">Annuler</button>
-        <button class="btn btn-success"  type="submit" *ngIf="!id">Ajouter</button>
-        <button class="btn btn-warning"  type="submit" *ngIf="id">Modifier</button>
+        <button class="btn btn-success" type="submit" *ngIf="!id">Ajouter</button>
+        <button class="btn btn-warning" type="submit" *ngIf="id">Modifier</button>
       </div>
     </div>
   </div>
