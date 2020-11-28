@@ -1,0 +1,11 @@
+<nz-transfer
+  [nzDataSource]="list"
+  nzShowSearch
+  [nzOperations]="['to right', 'to left']"
+  [nzListStyle]="{ 'width.px': 250, 'height.px': 300 }"
+  [nzRender]="render"
+  (nzSelectChange)="select($event)"
+  (nzChange)="change($event)"
+>
+  <ng-template #render let-item> {{ item.nom }}-{{ item.prenom }} </ng-template>
+</nz-transfer>
