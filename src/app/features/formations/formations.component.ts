@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Formation} from '../../shared/model/formation';
 import {Router} from '@angular/router';
 import {FormateurService} from '../../shared/services/formateurService';
-import {FormationService} from '../../shared/services/formationService';
+import {FormationService} from '../../shared/services/formation.service';
 import {MessageService} from '../../shared/services/message.service';
 
 @Component({
@@ -49,5 +49,9 @@ export class FormationsComponent implements OnInit {
 
   clickEdit(id: any) {
     this.router.navigate(['/app/features/formation/edit', id]);
+  }
+
+  affectCandidat() {
+    this.router.navigate(['/app/features/formation/affect']);
   }
 }

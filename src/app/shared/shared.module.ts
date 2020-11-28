@@ -7,7 +7,7 @@ import {
   NzModalModule,
   NzPopconfirmModule,
   NzPopoverModule, NzRadioModule, NzSelectModule, NzSwitchModule,
-  NzTableModule
+  NzTableModule, NzTransferModule
 } from 'ng-zorro-antd';
 import {FormsModule} from '@angular/forms';
 
@@ -29,7 +29,8 @@ import {FormsModule} from '@angular/forms';
     NzDatePickerModule,
     NzRadioModule,
     NzSelectModule,
-    NzSwitchModule
+    NzSwitchModule,
+    NzTransferModule
   ]
 })
 export class SharedModule { }

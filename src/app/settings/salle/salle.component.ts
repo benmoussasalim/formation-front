@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SalleService} from '../../shared/services/salle.service';
+import {SalleService} from '../../shared/services/salleService';
 import {Salle} from '../../shared/model/salle';
 import {MessageResponse} from '../../shared/model/messageResponse';
 import {MessageService} from '../../shared/services/message.service';

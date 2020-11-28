@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Formation} from '../../../shared/model/formation';
 import {Status} from '../../../shared/model/status';
-import {FormationService} from '../../../shared/services/formationService';
+import {FormationService} from '../../../shared/services/formation.service';
 import {MessageService} from '../../../shared/services/message.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ThemeService} from '../../../shared/services/theme.service';

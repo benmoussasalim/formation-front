@@ -4,13 +4,15 @@ import {CommonModule} from '@angular/common';
 import {FeaturesRoutingModule} from './features-routing.module';
 import {FormationsComponent} from './formations/formations.component';
 import { NewFormationComponent } from './formations/new-formation/new-formation.component';
+import { CandidatFormationComponent } from './formations/candidat-formation/candidat-formation.component';
 
 
 // @ts-ignore
 @NgModule({
   declarations: [
     FormationsComponent,
-    NewFormationComponent],
+    NewFormationComponent,
+    CandidatFormationComponent],
   imports: [
     CommonModule,
     SharedModule,

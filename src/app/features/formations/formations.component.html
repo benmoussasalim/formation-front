@@ -47,10 +47,17 @@
              (nzOnConfirm)="deleteFormation(data.id)">
             <i class="fa fa-trash-alt" style="color: red"></i>
           </a>
-          <a (click)="clickEdit(data.id)">
+          <a class="mr-2"
+            (click)="clickEdit(data.id)">
             <i class="fa fa-pencil-alt" style="color: green"></i>
 
           </a>
+          <a class="mr-2"
+            (click)="affectCandidat()">
+            <i class="fas fa-clipboard-list" style="color: blue"></i>
+            </a>
+
+
         </td>
 
       </tr>
