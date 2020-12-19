@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  NzButtonModule, NzDatePickerModule,
+  NzButtonModule, NzCardModule, NzCheckboxModule, NzDatePickerModule,
   NzIconModule,
   NzInputNumberModule,
   NzModalModule,
@@ -10,6 +10,7 @@ import {
   NzTableModule, NzTransferModule
 } from 'ng-zorro-antd';
 import {FormsModule} from '@angular/forms';
+import {NzSpaceModule} from 'ng-zorro-antd/space';
 
 
 @NgModule({
@@ -30,7 +31,10 @@ import {FormsModule} from '@angular/forms';
     NzRadioModule,
     NzSelectModule,
     NzSwitchModule,
-    NzTransferModule
+    NzTransferModule,
+    NzSpaceModule,
+    NzCardModule,
+    NzCheckboxModule
   ]
 })
 export class SharedModule { }

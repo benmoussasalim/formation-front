@@ -11,8 +11,11 @@ import {Candidat} from '../../../shared/model/candidat';
   styleUrls: ['./candidat-formation.component.scss']
 })
 export class CandidatFormationComponent implements OnInit {
-  list: Candidat[];
+  list1: Candidat[] = [];
+  list2: Candidat[] = [];
   candidatFormation: CandidatFormation = new CandidatFormation();
+  private expandSet: any;
+  isChecked = false;
 
   constructor(private candidatFormationService: CandidatFormationService,
               private candidatService: CandidatService) { }
@@ -22,18 +25,37 @@ export class CandidatFormationComponent implements OnInit {
   }
   getAll() {
     this.candidatService.getAll().subscribe(data => {
-      this.list = data;
-      console.log(this.list);
+      this.list1 = data;
+      console.log(this.list1);
     }, ex => {
       console.log(ex);
     });
   }
 
-  change(list: any) {
-    console.log('nzSelectChange', list);
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
   }
 
-  select(list: any) {
-    console.log('nzChange', list);
+ /* log(value) {
+    console.log(value);
+    // tslint:disable-next-line:radix
+    if ( parseInt(value[0]) > 0) {
+      this.listChecked.push(value[0]);
+    }
+   // console.log(this.listChecked);
+}*/
+
+  addCandidatFormations(data: any) {
+    console.log(data);
+    // this.list1 = this.list1.splice(data.valueOf());
+    // @ts-ignore
+    this.list1.splice(data.valueOf());
+    this.list2.push(data.valueOf());
+    console.log(this.list1);
+    console.log(this.list2);
   }
 }

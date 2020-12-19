@@ -1,11 +1,71 @@
-<nz-transfer
-  [nzDataSource]="list"
-  nzShowSearch
-  [nzOperations]="['to right', 'to left']"
-  [nzListStyle]="{ 'width.px': 250, 'height.px': 300 }"
-  [nzRender]="render"
-  (nzSelectChange)="select($event)"
-  (nzChange)="change($event)"
->
-  <ng-template #render let-item> {{ item.nom }}-{{ item.prenom }} </ng-template>
-</nz-transfer>
+<nz-space nzDirection="vertical">
+  <nz-space-item>
+    <nz-card nzTitle="Card1" style="width: 400px">
+      <nz-table #basicTable [nzData]="list1">
+        <thead>
+        <tr>
+          <th nzWidth="60px"></th>
+          <th>CIN</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Tarif</th>`
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let data of basicTable.data">
+          <tr >
+            <!--<td>
+              <nz-checkbox-wrapper >
+                  <div nz-col nzSpan="8"><label nz-checkbox nzValue= "{{data.id}}" ></label></div>
+              </nz-checkbox-wrapper>
+            </td>-->
+            <td><button nz-button (click)="addCandidatFormations(data)" nzType="primary" style="text-align: center"> ></button></td>
+            <td>{{data.cin}}</td>
+            <td>{{data.nom}}</td>
+            <td>{{data.prenom}}</td>
+            <td><input #tarif="ngModel" (keypress)="numberOnly($event)"
+                       [(ngModel)]="data.tarif" class="form-control"
+                       name="tarif" placeholder="tarif" required></td>
+
+        </ng-container>
+        </tbody>
+
+      </nz-table>
+    </nz-card>
+  </nz-space-item>
+</nz-space>
+
+<nz-space nzDirection="vertical" >
+  <nz-space-item>
+    <nz-card nzTitle="Card2" style="width: 400px">
+      <nz-table #basicTable2 [nzData]="list2">
+        <thead>
+        <tr>
+          <th>CIN</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let data of basicTable2.data">
+          <tr >
+            <!--<td>
+              <nz-checkbox-wrapper >
+                  <div nz-col nzSpan="8"><label nz-checkbox nzValue= "{{data.id}}" ></label></div>
+              </nz-checkbox-wrapper>
+            </td>-->
+            <td><button nz-button  nzType="primary" style="text-align: center"> ></button></td>
+            <td>{{data.cin}}</td>
+            <td>{{data.nom}}</td>
+            <td>{{data.prenom}}</td>
+
+
+        </ng-container>
+        </tbody>
+
+      </nz-table>
+    </nz-card>
+  </nz-space-item>
+
+</nz-space>
